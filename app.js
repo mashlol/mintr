@@ -6,12 +6,12 @@ var io = require('socket.io')(server);
 
 var monitor = require('./monitor');
 monitor.on('data', function(data) {
-  sendToAllSockets(data);
+  io.emit('data', data);
 });
 
 app.use(express.static(__dirname + '/public'));
 
-server.listen(3000);
+server.listen(parseInt(process.argv[1]) || 3000);
 
 var sockets = {};
 
@@ -25,11 +25,3 @@ io.on('connection', function (socket) {
     delete sockets[socket.id];
   });
 });
-
-var sendToAllSockets = function(data) {
-  for (var key in sockets) {
-    var socket = sockets[key];
-
-    socket.emit('data', data);
-  }
-};
