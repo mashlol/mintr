@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var express = require('express');
 var app = express();
 
@@ -11,7 +13,7 @@ monitor.on('data', function(data) {
 
 app.use(express.static(__dirname + '/public'));
 
-server.listen(parseInt(process.argv[1]) || 3000);
+server.listen(parseInt(process.argv[2]) || 3000);
 
 var sockets = {};
 
