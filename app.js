@@ -13,7 +13,9 @@ monitor.on('data', function(data) {
 
 app.use(express.static(__dirname + '/public'));
 
-server.listen(parseInt(process.argv[2]) || 3000);
+var port = parseInt(process.argv[2]) || 3000;
+server.listen(port);
+console.log("Mintr is listening on port " + port);
 
 var sockets = {};
 
