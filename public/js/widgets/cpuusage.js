@@ -29,7 +29,7 @@
     });
 
     this.div.innerText =
-      "CPU Load: " + cpuUsage + " %";
+      "CPU Load: " + cpuUsage.toFixed(2) + " %";
   };
 
   window.CPUUsageWidget = CPUUsageWidget;
