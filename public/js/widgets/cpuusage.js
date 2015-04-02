@@ -17,12 +17,19 @@
   };
 
   CPUUsageWidget.prototype.addData = function(data) {
-    if (data.cpu === undefined) {
-      return;
+    if (!data.processes) {
+      return false;
     }
 
+    var processes = data.processes;
+
+    var cpuUsage = 0;
+    processes.forEach(function(process) {
+      cpuUsage += process.cpu;
+    });
+
     this.div.innerText =
-      "CPU Load: " + data.cpu + " %";
+      "CPU Load: " + cpuUsage + " %";
   };
 
   window.CPUUsageWidget = CPUUsageWidget;
