@@ -1,22 +1,40 @@
 var exec = require('child_process').exec;
+var async = require('async');
+var os = require('os');
 
 var Memory = {};
 
 Memory.monitor = function(history, callback) {
-  exec('ifconfig', function(error, result) {
+  var interfaces = os.networkInterfaces();
+  delete interfaces.lo;
+
+  var execs = [];
+  for (var interface in interfaces) {
+    execs.push(exec.bind(this, 'ifconfig ' + interface));
+  }
+  async.parallel(execs, function(error, results) {
+    if (error) {
+      console.log(error);
+      return;
+    }
+
     var data = {};
+    data.in = 0;
+    data.out = 0;
 
-    var lineBreaks = result.indexOf('\n\n');
+    for (var x = 0; x < results.length; x++) {
+      var result = results[x][0];
 
-    var rxBytes = result.indexOf('RX bytes:', lineBreaks);
-    var end = result.indexOf(' ', rxBytes+9);
+      var rxBytes = result.indexOf('RX bytes:');
+      var end = result.indexOf(' ', rxBytes + 9);
 
-    data.in = parseInt(result.substring(rxBytes+9, end));
+      data.in += parseInt(result.substring(rxBytes + 9, end));
 
-    var txBytes = result.indexOf('TX bytes:', lineBreaks);
-    var end = result.indexOf(' ', txBytes+9);
+      var txBytes = result.indexOf('TX bytes:');
+      var end = result.indexOf(' ', txBytes + 9);
 
-    data.out = parseInt(result.substring(txBytes+9, end));
+      data.out += parseInt(result.substring(txBytes + 9, end));
+    }
 
     data.timestamp = Date.now();
 
