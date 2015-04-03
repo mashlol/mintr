@@ -111,7 +111,7 @@ $(function() {
   $(".legend").on("mouseover", "li", function(event) {
     var rect = this.getClientRects()[0];
     window.moveTooltip({
-      labels: [this.innerText],
+      labels: [this.textContent],
       colors: [$(this).find("span").css("background-color")],
       x: rect.left + 30,
       y: rect.top + 30 + window.scrollY,

@@ -84,8 +84,8 @@
     });
 
     $(this.canvas).on('mousemove', function(event) {
-      var mouseX = event.offsetX;
-      var mouseY = event.offsetY;
+      var mouseX = event.originalEvent.offsetX || event.originalEvent.layerX;
+      var mouseY = event.originalEvent.offsetY || event.originalEvent.layerY;
 
       this.chart.datasets.forEach(function(dataset) {
         dataset.points.forEach(function(point) {
