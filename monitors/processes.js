@@ -11,6 +11,9 @@ Processes.monitor = function(history, callback) {
 
     for (var x = 0; x < lines.length; x++) {
       var line = lines[x];
+      if (!line.trim()) {
+        continue;
+      }
       var process = {};
       var words = line.split(/\s+/);
       process.user = words[0];

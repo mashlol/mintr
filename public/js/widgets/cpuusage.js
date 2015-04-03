@@ -17,19 +17,18 @@
   };
 
   CPUUsageWidget.prototype.addData = function(data) {
-    if (!data.processes) {
+    if (!data.cpu) {
       return false;
     }
 
-    var processes = data.processes;
-
-    var cpuUsage = 0;
-    processes.forEach(function(process) {
-      cpuUsage += process.cpu;
-    });
+    if (data.cpu.length) {
+      var cpu = data.cpu[data.cpu.length - 1].cpu;
+    } else {
+      cpu = data.cpu.cpu;
+    }
 
     this.div.innerText =
-      "CPU Load: " + cpuUsage.toFixed(2) + " %";
+      "CPU Load: " + cpu.toFixed(2) + " %";
   };
 
   window.CPUUsageWidget = CPUUsageWidget;

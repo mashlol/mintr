@@ -82,6 +82,7 @@ $(function() {
   };
 
   var widgetClasses = [
+    CPUChartWidget,
     FreememWidget,
     NetworkWidget,
     ProcessCPUWidget,

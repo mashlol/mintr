@@ -13,6 +13,7 @@ var monitors = {
   uptime: require('./monitors/uptime'),
   network: require('./monitors/network'),
   processes: require('./monitors/processes'),
+  cpu: require('./monitors/cpu'),
 };
 
 // XXX: Hacky way to prevent us from having to call the callback
