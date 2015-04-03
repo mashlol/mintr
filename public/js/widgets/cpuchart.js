@@ -35,7 +35,7 @@
     history.cpu.forEach(function(data, index) {
       this.numPoints++;
 
-      dataPoints.push(Math.floor(data.cpu));
+      dataPoints.push(data.cpu);
       labels.push(
         index % 5 === 0
           ? moment(data.timestamp).format('h:mm:ss')
@@ -54,9 +54,7 @@
       return;
     }
 
-    return [
-      Math.floor(data.cpu.cpu),
-    ];
+    return [data.cpu.cpu];
   };
 
   CPUChartWidget.prototype.getLabelFromData = function(data) {
