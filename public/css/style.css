@@ -122,4 +122,7 @@ body {
   pointer-events: none;
   display: none;
   line-height: normal;
+  max-width: 800px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
