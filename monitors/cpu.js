@@ -1,4 +1,5 @@
 var exec = require('child_process').exec;
+var os = require('os');
 
 var CPU = {};
 
@@ -16,8 +17,12 @@ CPU.monitor = function(history, callback) {
       cpu += parseFloat(lines[x].split(/\s+/)[2]);
     }
 
+    // Also record a normalized CPU usage per thread
+    var normalized = cpu / os.cpus().length;
+
     callback({
       cpu: cpu,
+      normalized: normalized,
       timestamp: Date.now(),
     });
   });
