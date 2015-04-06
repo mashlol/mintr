@@ -13,13 +13,17 @@ Currently it shows
 * Network activity
 * Process memory usage & CPU usage
 
-You can see a demo at http://kevinbedi.com:3000
+You can see a demo at http://mintr.kevinbedi.com
 
-# Installation
+# Installation & Usage
 
 ```
 npm install -g mintr
+mintr
 ```
-It takes an optional parameter which is the port it runs on, so you can run `mintr 1337` if you want to run it on port 1337.  The default port is 3000.
+
+If you do not have nodejs/npm, you'll need to install that first.  See https://nodejs.org/ for instructions on this.
+
+`mintr` takes an optional parameter which is the port it runs on, so you can run `mintr 1337` if you want to run it on port `1337`.  The default port is `3000`.
 You can run `mintr` in a screen/tmux, add it to your system's startup, or anything else you please.
-Then go to `http://your-server.com:3000`, or replace 3000 with the correct port.
+Then go to `http://your-server.com:3000`, or replace `3000` with the correct port.
