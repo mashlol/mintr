@@ -1,7 +1,7 @@
 {
   "name": "mintr",
   "author": "Kevin Bedi",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A simple unix monitor",
   "main": "app.js",
   "bin": "./app.js",
