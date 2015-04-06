@@ -5,7 +5,7 @@
   FreememWidget.prototype = Object.create(BaseChartWidget.prototype);
 
   FreememWidget.prototype.getTitle = function() {
-    return "Free Memory";
+    return "Used Memory";
   };
 
   FreememWidget.prototype.getWidthClass = function() {
@@ -21,7 +21,7 @@
   };
 
   FreememWidget.prototype.getLabels = function() {
-    return ['Free Memory'];
+    return ['Used Memory'];
   };
 
   FreememWidget.prototype.getSuffix = function() {
@@ -34,7 +34,7 @@
     history.memory.forEach(function(data, index) {
       this.numPoints++;
 
-      dataPoints.push(Math.floor(data.free / 1000000));
+      dataPoints.push(Math.floor((data.total - data.free) / 1000000));
       labels.push(
         index % 5 === 0
           ? moment(data.timestamp).format('h:mm:ss')
@@ -53,7 +53,7 @@
       return;
     }
 
-    return [Math.floor(data.memory.free / 1000000)];
+    return [Math.floor((data.memory.total - data.memory.free) / 1000000)];
   };
 
   FreememWidget.prototype.getLabelFromData = function(data) {

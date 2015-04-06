@@ -23,11 +23,12 @@
       return;
     }
 
-    var freeMemMB = [Math.floor(data.memory.free / 1000000)];
-    var totalMemMB = [Math.floor(data.memory.total / 1000000)]
+    var usedMemMB =
+      Math.floor((data.memory.total - data.memory.free) / 1000000);
+    var totalMemMB = Math.floor(data.memory.total / 1000000);
 
     this.div.innerText =
-      "Used Memory: " + (totalMemMB - freeMemMB) + "MB / " + totalMemMB + "MB";
+      "Used Memory: " + usedMemMB + "MB / " + totalMemMB + "MB";
   };
 
   window.MemoryWidget = MemoryWidget;
