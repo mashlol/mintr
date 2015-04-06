@@ -5,35 +5,41 @@ var os = require('os');
 var Memory = {};
 
 Memory.monitor = function(history, callback) {
-  var interfaces = os.networkInterfaces();
-  delete interfaces.lo;
-
-  var execs = [];
-  for (var interface in interfaces) {
-    execs.push(exec.bind(this, 'ifconfig ' + interface));
-  }
-  async.parallel(execs, function(error, results) {
+  exec('ip -s link', function(error, result) {
     if (error) {
+      console.log(
+        'Mintr uses `ip` to get network information, which your ' +
+        'OS does not support.'
+      );
       console.log(error);
+      callback({});
       return;
     }
 
-    var data = {};
-    data.in = 0;
-    data.out = 0;
+    var data = {
+      in: 0,
+      out: 0,
+    };
 
-    for (var x = 0; x < results.length; x++) {
-      var result = results[x][0];
+    var rx = result.match(/\d+:\s+\w+:\s+[\S\s]*?RX:\s+[\S\s]*?(\d+)/g);
+    var tx = result.match(/\d+:\s+\w+:\s+[\S\s]*?TX:\s+[\S\s]*?(\d+)/g);
 
-      var rxBytes = result.indexOf('RX bytes:');
-      var end = result.indexOf(' ', rxBytes + 9);
+    for (var x = 0; x < rx.length; x++) {
+      var localAmt = rx[x];
+      if (localAmt.indexOf('lo:') !== -1) {
+        continue;
+      }
 
-      data.in += parseInt(result.substring(rxBytes + 9, end));
+      data.in += parseInt(localAmt.substring(localAmt.lastIndexOf('\n') + 1));
+    }
 
-      var txBytes = result.indexOf('TX bytes:');
-      var end = result.indexOf(' ', txBytes + 9);
+    for (var x = 0; x < rx.length; x++) {
+      var localAmt = tx[x];
+      if (localAmt.indexOf('lo:') !== -1) {
+        continue;
+      }
 
-      data.out += parseInt(result.substring(txBytes + 9, end));
+      data.out += parseInt(localAmt.substring(localAmt.lastIndexOf('\n') + 1));
     }
 
     data.timestamp = Date.now();
