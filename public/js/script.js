@@ -55,6 +55,8 @@ window.moveTooltip = function(tooltip, element, middleX) {
 };
 
 $(function() {
+  Chart.defaults.global.animation = false;
+
   var container = document.getElementsByClassName('container')[0];
 
   var createWidget = function(Widget) {
