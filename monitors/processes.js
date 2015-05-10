@@ -1,10 +1,12 @@
 var exec = require('child_process').exec;
 
+var MAX_NAME_LENGTH = 40;
+
 var Processes = {};
 
 Processes.monitor = function(history, callback) {
   exec('ps aux', function(error, result) {
-    var data = [];
+    var processes = [];
 
     var lines = result.split('\n');
     lines.splice(0, 1);
@@ -24,12 +26,30 @@ Processes.monitor = function(history, callback) {
       for (var y = 11; y < words.length; y++) {
         name += ' ' + words[y];
       }
-      process.name = name;
+      process.name = name && name.substring(0, MAX_NAME_LENGTH);
 
-      data.push(process);
+      processes.push(process);
     }
 
-    callback(data);
+    var topCPU = processes.sort(function(a, b) {
+      return b.cpu - a.cpu;
+    }).slice(0, 5);
+    var topMem = processes.sort(function(a, b) {
+      return b.mem - a.mem;
+    }).slice(0, 5);
+
+    var topProcesses = [];
+    var topPIDs = {};
+    for (var x = 0; x < topCPU.length; x++) {
+      topPIDs[topCPU[x].pid] = true;
+      topProcesses.push(topCPU[x]);
+      if (!topPIDs[topMem[x].pid]) {
+        topPIDs[topMem[x].pid] = true;
+        topProcesses.push(topMem[x]);
+      }
+    }
+
+    callback(topProcesses);
   });
 };
 
