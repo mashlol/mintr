@@ -12,6 +12,7 @@ Currently it shows
 * CPU Usage
 * Network activity
 * Process memory usage & CPU usage
+* Temperature Sensors
 
 You can see a demo at http://mintr.kevinbedi.com
 
