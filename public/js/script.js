@@ -1,6 +1,6 @@
 var socket = io();
 
-window.moveTooltip = function(tooltip, element, middleX) {
+window.moveTooltip = function (tooltip, element, middleX) {
   var $tooltip = $('.tooltip');
   if (!tooltip) {
     $tooltip.hide();
@@ -19,7 +19,7 @@ window.moveTooltip = function(tooltip, element, middleX) {
 
   $tooltip.html('');
 
-  var values = tooltip.labels.map(function(label, index) {
+  var values = tooltip.labels.map(function (label, index) {
     return {
       label: label,
       datasetLabel: tooltip.datasetLabels && tooltip.datasetLabels[index],
@@ -27,11 +27,11 @@ window.moveTooltip = function(tooltip, element, middleX) {
     };
   });
 
-  values.sort(function(a, b) {
+  values.sort(function (a, b) {
     return parseInt(b.label) - parseInt(a.label);
   });
 
-  values.forEach(function(value) {
+  values.forEach(function (value) {
     var label = value.label;
     if (value.datasetLabel) {
       label = value.datasetLabel + ': ' + label;
@@ -54,12 +54,12 @@ window.moveTooltip = function(tooltip, element, middleX) {
   $tooltip.show();
 };
 
-$(function() {
+$(function () {
   Chart.defaults.global.animation = false;
 
   var container = document.getElementsByClassName('container')[0];
 
-  var createWidget = function(Widget) {
+  var createWidget = function (Widget) {
     var widget = document.createElement('div');
     container.appendChild(widget);
 
@@ -92,26 +92,27 @@ $(function() {
     UptimeWidget,
     CPUUsageWidget,
     ProcessMemoryWidget,
+    TempsWidget,
   ];
 
-  var widgets = widgetClasses.map(function(Widget) {
+  var widgets = widgetClasses.map(function (Widget) {
     return createWidget(Widget);
   });
 
-  socket.on('history', function(history) {
-    widgets.forEach(function(widget) {
+  socket.on('history', function (history) {
+    widgets.forEach(function (widget) {
       widget.initialize(history);
     });
   });
 
-  socket.on('data', function(data) {
-    widgets.forEach(function(widget) {
+  socket.on('data', function (data) {
+    widgets.forEach(function (widget) {
       widget.addData(data);
     });
   });
 
   // Legend tooltips
-  $(".legend").on("mouseover", "li", function(event) {
+  $(".legend").on("mouseover", "li", function (event) {
     var rect = this.getClientRects()[0];
     window.moveTooltip({
       labels: [this.textContent],
@@ -121,7 +122,7 @@ $(function() {
     }, document.body, 10000);
   });
 
-  $(".legend").on("mouseout", "li", function(event) {
+  $(".legend").on("mouseout", "li", function (event) {
     $(".tooltip").hide();
   });
 });
