@@ -3,6 +3,11 @@ const fs = require('fs');
 var Temps = {};
 
 Temps.monitor = function (history, callback) {
+  if (!fs.existsSync('/sys/class/thermal')) {
+    callback({});
+    return;
+  }
+
   const tempSensorDirs = fs.readdirSync('/sys/class/thermal')
     .filter(x => x.startsWith('thermal'));
 
