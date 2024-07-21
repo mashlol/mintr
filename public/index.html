@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Mintr</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
+    <link
+      href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link href="./css/font-awesome.css" rel="stylesheet" />
     <link href="./css/style.css" rel="stylesheet" />
+    <link
+      type="text/css"
+      href="./css/darkmode.css"
+      rel="stylesheet"
+      media="all"
+      id="theme"
+    />
 
-    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+      integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+      crossorigin="anonymous"
+    ></script>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="./js/lib/moment.min.js"></script>
     <script src="./js/lib/Chart.min.js"></script>
@@ -25,13 +40,17 @@
     <script src="./js/widgets/freemem.js"></script>
     <script src="./js/widgets/temps.js"></script>
     <script src="./js/script.js"></script>
-</head>
-<body>
+    <script src="./js/theme.js"></script>
+  </head>
+  <body>
     <div class="tooltip"></div>
     <div class="header">
-        <div class="title-container">Mintr</div>
+      <div class="title-container">
+        <span>Mintr</span>
+        <div class="theme-button"></div>
+      </div>
     </div>
     <div class="container"></div>
     <div class="footer"></div>
-</body>
+  </body>
 </html>

@@ -1,3 +1,7 @@
+:root {
+  --transition: all ease-in-out 200ms;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,14 +9,17 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 300;
-  background: #fafafa;
+  transition: var(--transition);
+}
+
+.theme-button {
+  cursor: pointer;
 }
 
 .header {
-  background: white;
-  color: #2196F3;
+  color: #2196f3;
   padding: 20px;
   font-size: 22px;
   font-weight: bold;
@@ -21,7 +28,7 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
-  box-shadow: 0 0 5px #888;
+  transition: var(--transition);
 }
 
 .container {
@@ -31,8 +38,6 @@ body {
 }
 
 .widget {
-  background: #fff;
-  border: 1px solid #f0f0f0;
   margin: 0 10px 10px 0;
   text-align: center;
   display: inline-block;
@@ -40,12 +45,13 @@ body {
   vertical-align: top;
   float: left;
   border-radius: 8px;
-  box-shadow: 0 0 5px #ccc;
+  overflow: hidden;
+  transition: var(--transition);
 }
 
 .widget-content {
   padding: 20px;
-  color: #2196F3;
+  color: #2196f3;
   font-weight: 500;
   position: relative;
 }
@@ -87,7 +93,7 @@ body {
 }
 
 .widget.two {
- width: 624px;
+  width: 624px;
 }
 
 .widget.three {
@@ -100,31 +106,29 @@ body {
   text-transform: uppercase;
   text-align: left;
   padding: 14px 20px;
-  background: #f5f5f5;
-  color: #aaa;
-  border-bottom: 1px solid #eee;
+  transition: var(--transition);
 }
 
 .title-container {
   width: 960px;
   margin: 0 auto;
   padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tooltip {
   position: absolute;
   top: 190px;
   left: 610px;
-  background: #f9f9f9;
   padding: 5px 10px;
   border-radius: 2px;
-  color: #000;
   white-space: nowrap;
-  box-shadow: 0 2px 6px -4px #444;
   pointer-events: none;
   display: none;
   line-height: normal;
   max-width: 800px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  transition: var(--transition);
 }
