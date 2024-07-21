@@ -39,6 +39,8 @@ body {
   width: 100%;
   vertical-align: top;
   float: left;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #ccc;
 }
 
 .widget-content {
